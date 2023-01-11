@@ -1,5 +1,5 @@
 public class Main {
-    public static void main(String[] args) throws LimitException {
+    public static void main(String[] args)  {
         BankAccount account = new BankAccount();
         account.deposit(20000.0);
         boolean end = false;
@@ -9,7 +9,11 @@ public class Main {
                 System.out.println("Было снято, ваш текущий счет: " + account.getAmount());
             }catch (LimitException le){
                 System.out.println(le.getMessage());
-                account.withDraw(le.getRemainingAmount());
+                try {
+                    account.withDraw(le.getRemainingAmount());
+                } catch (LimitException e) {
+                    throw new RuntimeException(e);
+                }
                 System.out.println("Было снято отсавшая сумма, текущий счет: " + account.getAmount());
                 end = true;
             }
