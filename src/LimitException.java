@@ -1,4 +1,4 @@
-public class LimitException extends RuntimeException{
+public class LimitException extends Exception{
     private Double remainingAmount;
 
     public LimitException(String message, Double remainingAmount) {
